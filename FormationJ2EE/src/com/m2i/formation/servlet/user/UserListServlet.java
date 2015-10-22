@@ -2,6 +2,7 @@ package com.m2i.formation.servlet.user;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -17,14 +18,14 @@ import com.m2i.formation.j2ee.assurance.UserManager;
  * Servlet implementation class UserList
  */
 @WebServlet("/user/list")
-public class UserList extends HttpServlet 
+public class UserListServlet extends HttpServlet 
 {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserList() 
+    public UserListServlet() 
     {
         super();
         // TODO Auto-generated constructor stub
@@ -33,7 +34,7 @@ public class UserList extends HttpServlet
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException 
 	{
 		/*
 		UserManager userManager = new UserManager();
@@ -43,7 +44,18 @@ public class UserList extends HttpServlet
 		
 		/**** OU ***/
 		
-		doView(request, response, UserManager.getInstance().getAll());
+		try
+		{
+			doView(request, response, UserManager.getInstance().getAll());
+		} catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 	}
 
 	/**
@@ -82,10 +94,13 @@ public class UserList extends HttpServlet
 		for(User u:users)
 		{
 			out.println("<p>");
-			out.println("Client <a href='detail?id="  + u.getId() + "'>" + u.getId()+ "</a>");
+			//out.println("Client <a href='detail?id="  + u.getId() + "'>" + u.getId()+ "</a>");
+			out.println("Client "  + u.getId() + " : ");
 			out.println("<br>First Name : " + u.getFirstName() + "<br>"); 
 			out.println("Last Name : " + u.getLastName() + "<br>"); 
 			out.println("Address : " +  u.getAddress() + "<br>"); 
+			out.println("<a href='detail?id="  + u.getId() + "'>Details on the user</a><br>");
+			out.println("<a href='delete?id="  + u.getId() + "'>Delete the user</a><br>");
 			out.println("</p>");
 		}
 		

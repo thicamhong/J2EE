@@ -17,13 +17,13 @@ import com.m2i.formation.j2ee.assurance.UserManager;
  * Servlet implementation class UserDetail
  */
 @WebServlet("/user/detail")
-public class UserDetail extends HttpServlet {
+public class UserDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserDetail() {
+    public UserDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
