@@ -40,6 +40,7 @@ public class UserDetailServlet extends HttpServlet {
 		
 		/***** OU *****/
 		
+		/*
 		String id = request.getParameter("id");
 		
 		if(id != null && !id.isEmpty())
@@ -50,6 +51,42 @@ public class UserDetailServlet extends HttpServlet {
 		else
 		{
 			doView(request, response);
+		}
+		*/
+		
+		/***** OU *****/
+		// Recupere l'attribut de la session : formatDisplay
+		String format = (String)request.getSession().getAttribute("formatDisplay");
+		// Recupere le parametre de la requete : id de l'utisateur selectionne
+		String id = request.getParameter("id");
+		
+		// Recupere les donnees du user selectionne en fonction de son id
+		User user = UserManager.getInstance().getById(Integer.parseInt(id));
+		
+		PrintWriter out = response.getWriter();
+		
+		// Si le format d'affichage demande est JSON ou XML
+		if(format !=null && (format.equals("JSON") || format.equals("XML")) )
+		{
+			// On indique que le format d'affichage de la reponse
+			response.setContentType(format);
+			
+			if(format.equals("JSON") )
+			{
+				out.println(user.toJSON());
+			}
+			else
+			{
+				out.println(user.toXML());
+			}			
+		}
+		
+		// Sino je redispatche vers la JSP
+		else
+		{		
+			request.getSession().setAttribute("idUser", id);
+			request.getSession().setAttribute("user", user);
+			request.getRequestDispatcher("/UserDetail.jsp").forward(request, response);
 		}
 	}
 

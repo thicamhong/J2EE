@@ -28,6 +28,7 @@ public class ServletP1 extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		/*
 		// Tout ce que je t'envoie est du HTML
 		response.setContentType("text/html");
 		response.setCharacterEncoding("UTF-8");
@@ -62,7 +63,14 @@ public class ServletP1 extends HttpServlet {
 		
 		out.println("</body>");
 		out.println("</html>");
+		*/
 		
+		String title = "Titreeee";
+		
+		// Parametre est une paire (clé, valeur)
+		request.setAttribute("title", title);
+		
+		request.getRequestDispatcher("/formulaire.jsp").forward(request, response);
 		
 		
 	}

@@ -17,7 +17,7 @@ import com.m2i.formation.j2ee.assurance.UserManager;
 /**
  * Servlet implementation class UserList
  */
-@WebServlet("/user/list")
+@WebServlet(urlPatterns={"/user/list"})
 public class UserListServlet extends HttpServlet 
 {
 	private static final long serialVersionUID = 1L;
@@ -46,7 +46,19 @@ public class UserListServlet extends HttpServlet
 		
 		try
 		{
-			doView(request, response, UserManager.getInstance().getAll());
+			// On le met en commentaire car le traitement est deporte dans le JSP
+			//doView(request, response, UserManager.getInstance().getAll());
+			
+			// la liste des users est un attribut de la request
+			//request.setAttribute("userList", UserManager.getInstance().getAll());
+			
+			// la liste des users est dans la session
+			// la session est dans la request
+			request.getSession().setAttribute("userList", UserManager.getInstance().getAll());
+			
+			//request.getSession().invalidate();
+			
+			request.getRequestDispatcher("/UserList.jsp").forward(request, response);
 		} catch (SQLException e)
 		{
 			// TODO Auto-generated catch block
@@ -65,6 +77,7 @@ public class UserListServlet extends HttpServlet
 	{
 		// TODO Auto-generated method stub
 		doGet(request, response);
+		
 	}
 
 	
@@ -90,21 +103,26 @@ public class UserListServlet extends HttpServlet
 		PrintWriter out = response.getWriter();
 		
 		out.println("<html><body><h1>Liste des users</h1>");
-		
+			
 		for(User u:users)
 		{
+		
 			out.println("<p>");
 			//out.println("Client <a href='detail?id="  + u.getId() + "'>" + u.getId()+ "</a>");
 			out.println("Client "  + u.getId() + " : ");
 			out.println("<br>First Name : " + u.getFirstName() + "<br>"); 
 			out.println("Last Name : " + u.getLastName() + "<br>"); 
 			out.println("Address : " +  u.getAddress() + "<br>"); 
-			out.println("<a href='detail?id="  + u.getId() + "'>Details on the user</a><br>");
-			out.println("<a href='delete?id="  + u.getId() + "'>Delete the user</a><br>");
+			out.println("<a href='/user/detail?id="  + u.getId() + "'>Details on the user</a><br>");
+			out.println("<a href='/user/delete?id="  + u.getId() + "'>Delete the user</a><br>");
 			out.println("</p>");
+			
+			
+		
 		}
 		
 		out.println("</body></html>");
+		
 	}
 
 }

@@ -1,0 +1,63 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<%
+		for(User u:(List <User>)request.getSession().getAttribute("userList"))
+		{
+	%>
+			<ul>
+				<li> Client <a href='detail?id=<%= u.getId() %>'> <%= u.getId() %> </a> </li>
+				<li> First Name : <%=u.getFirstName()%> </li>
+				<li> Last Name : <%=u.getLastName()%> </li>
+				<li> Address :  <%=u.getAddress()%> </li>
+				<li> <a href='/user/detail?id=<%= u.getId() %>'>Details on the user</a> </li>
+				<li> <a href='/user/delete?id=<%= u.getId() %>'>Delete the user</a> </li>
+				
+			</ul>
+	<%  }  %>
+
+<!-- OU avec plus de code java -->
+
+<%
+	for(User u:(List <User>)request.getAttribute("userList"))
+	{
+		
+			out.println("<p>");
+			out.println("Client <a href='detail?id="  + u.getId() + "'>" + u.getId()+ "</a>");
+			out.println("Client "  + u.getId() + " : ");
+			out.println("<br>First Name : " + u.getFirstName() + "<br>"); 
+			out.println("Last Name : " + u.getLastName() + "<br>"); 
+			out.println("Address : " +  u.getAddress() + "<br>"); 
+			out.println("<a href='/user/detail?id="  + u.getId() + "'>Details on the user</a><br>");
+			out.println("<a href='/user/delete?id="  + u.getId() + "'>Delete the user</a><br>");
+			out.println("</p>");
+			
+			
+		
+	}	
+	%>
+
+
+<!-- OU avec du JSTL -->
+
+<c:forEach items="${sessionScope.userList}" var="user">
+	<ul>
+				<li> Client <a href='detail?id=${user.id}'> ${user.id} </a> </li>
+				<li> First Name : ${user.firstName} </li>
+				<li> Last Name : ${user.lastName} </li>
+				<li> Address :   ${user.address} </li>
+				<li> <a href='/user/detail?id=${user.id}'>Details on the user</a> </li>
+				<li> <a href='/user/delete?id=${user.id}'>Delete the user</a> </li>
+				
+			</ul>
+</c:forEach>
+
+</body>
+</html>
