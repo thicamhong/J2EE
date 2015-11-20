@@ -38,7 +38,7 @@ public class HomePage extends HttpServlet {
 		
 		String login = request.getParameter("login");
 		String password = request.getParameter("password");
-		String format = request.getParameter("format");
+		//String format = request.getParameter("format");
 		
 		if(login!=null && password!=null )
 		{
@@ -53,7 +53,7 @@ public class HomePage extends HttpServlet {
 									request.getSession().setAttribute("userList", UserManager.getInstance().getAll());
 									request.getSession().setAttribute("userIsLogged", true);
 									request.getSession().setAttribute("userLogin", login);
-									request.getSession().setAttribute("formatDisplay", format.toUpperCase());
+									//request.getSession().setAttribute("formatDisplay", format.toUpperCase());
 									
 								} catch (SQLException e)
 								{

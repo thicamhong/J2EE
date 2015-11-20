@@ -56,9 +56,13 @@ public class UserDetailServlet extends HttpServlet {
 		
 		/***** OU *****/
 		// Recupere l'attribut de la session : formatDisplay
-		String format = (String)request.getSession().getAttribute("formatDisplay");
+		//String format = (String)request.getSession().getAttribute("formatDisplay");
+		String format = request.getParameter("formatDisplay");
+		System.out.println("[userDetail] formatDisplay :" + format);
+		
 		// Recupere le parametre de la requete : id de l'utisateur selectionne
 		String id = request.getParameter("id");
+		System.out.println("toto est passé par là !!!!");
 		
 		// Recupere les donnees du user selectionne en fonction de son id
 		User user = UserManager.getInstance().getById(Integer.parseInt(id));

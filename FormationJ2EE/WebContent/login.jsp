@@ -28,10 +28,10 @@
 					<br>
 					Password : <input type="password" name="password">
 					<br>
-					<br>
+					<br> <!-- 
 					Format : <input type="text" name="format">
 					<br>
-					<br>
+					<br> -->
 					<input type="submit" value="Submit">
 				</form>
 			</body>

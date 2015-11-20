@@ -30,6 +30,7 @@
 			<th> <fmt:message bundle="${msg}"  key="firstName"></fmt:message> </th>
 			<th> <fmt:message bundle="${msg}"  key="lastName"></fmt:message> </th>
 			<th> <fmt:message bundle="${msg}"  key="address"></fmt:message> </th>
+			<th> <fmt:message bundle="${msg}"  key="format"></fmt:message> </th>
 		</tr>
 		<c:forEach items="${sessionScope.userList}" var="user">
 	
@@ -38,8 +39,10 @@
 				<td> ${user.firstName} </td>
 				<td> ${user.lastName} </td>
 				<td> ${user.address} </td>
-				<td> <a href='<c:url value='/user/detail?id=${user.id}'/>'>Details </a> </td>
-				<td> <a href='/user/delete?id=${user.id}'>Delete </a> </td>
+				<td> <form action="user/detail?id=${user.id}" method="GET"> <input type="text" name="formatDisplay" value="xml"> </td>
+				<!-- td> <a href='<c:url value='user/detail?id=${user.id}'/>'>Details</a> </td-->
+				<td> <a href='<c:url value="user/detail?id=${user.id}"/>'><button>Details</button></a> </form> </td>
+				<td> <a href='<c:url value="user/detail?id=${user.id}"/>'>Delete </a> </td>
 				<td> <br> </td>
 				
 			</tr>

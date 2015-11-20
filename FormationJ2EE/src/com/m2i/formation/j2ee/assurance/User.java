@@ -72,7 +72,7 @@ public class User
 		
 		sb.append("<user>\n");
 		
-		sb.append("\t<id>");
+		sb.append("\t<id>\n");
 		sb.append("\t\t" + id + "\n");
 		sb.append("\t</id>\n");
 		

@@ -17,7 +17,7 @@ import com.m2i.formation.j2ee.assurance.UserManager;
 /**
  * Servlet implementation class UserList
  */
-@WebServlet(urlPatterns={"/user/list"})
+@WebServlet("/user/list")
 public class UserListServlet extends HttpServlet 
 {
 	private static final long serialVersionUID = 1L;
